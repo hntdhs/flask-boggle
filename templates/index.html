@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boggle</title>
+    <link rel="stylesheet" href="/static/boggle.css">
+</head>
+<body>
+    <section id="boggle">
+
+        <table class="board">
+            <tbody>
+            {% for row in board %}
+            <!-- using Jinja to run the for loop in make_board() in boggle.py -->
+            <tr>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                <!-- this is dictated by the for loop - row is list of 5 random letters, and there's 5 of these row lists. then 'cell' is each of those 5 letters within that set of 5 lists  -->
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <p>
+            <b>{{ highscore }}</b>
+            in {{ nplays }} times played
+        </p>
+
+        <p>
+            Score: <b class="score">0</b>
+            Seconds left: <b class="timer"></b>
+        </p>
+
+        <form method="POST" class="add-word">
+            <input name="word" class="word" autofocus>
+            <button>Submit</button>
+        </form>
+
+        <p class="msg">
+
+        </p>
+
+        <ul class="words">
+
+        </ul>
+
+    </section>
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/boggle.js"></script>
+    <script>
+      let game = new BoggleGame("boggle", 60);
+        // sets new Boggle game using the BoggleGame class from js file, starts it at 60 seconds
+    </script>
+</body>
+</html>
